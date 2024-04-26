@@ -1,0 +1,23 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/TicketCore.Web/appsettings.Development.json
+/.vs/ProjectEvaluation
+/.vs/VueTicketCore
+/TicketCore.Common/bin
+/TicketCore.Common/obj
+/TicketCore.Core/bin
+/TicketCore.Core/obj
+/TicketCore.Data/bin
+/TicketCore.Data/obj
+/TicketCore.Models/bin
+/TicketCore.Models/obj
+/TicketCore.Services/bin
+/TicketCore.Services/obj
+/TicketCore.ViewModels/bin
+/TicketCore.ViewModels/obj
+/TicketCore.Web/bin
+/TicketCore.Web/obj
+/TicketCore.Web/Properties/PublishProfiles
+/TicketCore.Web/TicketCore.Web.csproj.user

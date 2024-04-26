@@ -1,0 +1,183 @@
+﻿@using System.Web
+@model TicketCore.ViewModels.LoginVM.LoginViewModel
+@{ Layout = null; }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Help Desk - eHPUni</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link asp-append-version="true" rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <link asp-append-version="true" rel="stylesheet" href="~/css/adminlte.min.css">
+    <link asp-append-version="true" href="~/js/jqueryconfirm/dist/jquery-confirm.min.css" rel="stylesheet" />
+    <link asp-append-version="true" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+<body class="hold-transition login-page">
+    @if (TempData["TokenErrorMessage"] != null)
+    {
+        <div class="alert alert-danger alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Message!</strong> @TempData["TokenErrorMessage"]
+        </div>}
+
+    @if (TempData["TokenMessage"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Message!</strong> @TempData["TokenMessage"]
+        </div>}
+
+    @if (TempData["Reset_Success_Message"] != null)
+    {
+        <div class="alert alert-success alert-dismissible fade show">
+            <button type="button" class="close" data-dismiss="alert">&times;</button>
+            <strong>Message!</strong> @TempData["Reset_Success_Message"]
+        </div>}
+
+
+    <div class="login-box" style="border-top-color: #4285f4">
+        
+        <div class="card">
+            <div style="height:20px"></div>
+            <div class="login-logo">
+                <img src="https://cdn-01.dhhp.edu.vn/img/logo-60x60.png" />
+                <span class="splash-description">
+                    <h4 style="font-weight: bold; padding-top:12px">HỆ THỐNG HỖ TRỢ - eHPUni </h4>
+                    <h5 style="font-weight: bold;"></h5>
+                </span>
+               
+                <hr />
+            </div>
+            <div class="card-body login-card-body">
+                
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <form id="account" asp-controller="Portal" asp-antiforgery="true" asp-action="Login" method="post">
+                    <input asp-for="Hdrandomtoken" type="hidden" />
+                    <span asp-validation-for="Username" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input asp-for="Username" class="form-control" placeholder="Tên đăng nhập" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-envelope"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <span asp-validation-for="Password" class="text-danger"></span>
+                    <div class="input-group mb-3">
+                        <input type="password" asp-for="Password" autocomplete="new-password" class="form-control" placeholder="Mật khẩu" />
+                        <div class="input-group-append">
+                            <div class="input-group-text">
+                                <span class="fas fa-lock"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-7">
+                        
+                       
+                        <dnt-captcha asp-captcha-generator-max="999999"
+                                     asp-captcha-generator-min="111111"
+                                     asp-captcha-generator-language="English"
+                                     asp-captcha-generator-display-mode="ShowDigits"
+                                     asp-use-relative-urls="true"
+                                     asp-placeholder="Mã bảo mật"
+                                     asp-validation-error-message="Vui lòng nhập đúng mã bảo mật."
+                                     asp-font-name="Tahoma"
+                                     asp-font-size="20"
+                                     asp-fore-color="#333333"
+                                     asp-back-color="#FCF6F5FF"
+                                     asp-text-box-class="text-box form-control"
+                                     asp-text-box-template="<span class='input-group-prepend'><span class='form-group-text'></span></span>{0}"
+                                     asp-validation-message-class="text-danger"
+                                     asp-refresh-button-class="fas fa-redo btn-sm"
+                                     asp-dir="ltr"
+                                     asp-use-noise="true" />
+                        </div>
+                        <div class="col-5" style="padding-top:30px">
+                            <button type="submit" id="btnsubmit" class="btn btn-primary btn-block">Đăng nhập</button>
+                        </div>
+                    </div>
+                    
+
+                </form>
+
+                <p class="mb-1">
+                    <a asp-controller="ForgotPassword" asp-action="Recover">Quên mật khẩu</a>
+                </p>
+               @*  <p class="mb-0">
+                    <a asp-controller="Signup" class="text-center" asp-action="form">Đăng ký thành viên</a>
+                </p> *@
+            </div>
+        </div>
+    
+    </div>
+    <div class="splash-footer"><span>Bạn chưa có tài khoản? <a href="tel:0912.22.10.84">Liên hệ 0912.22.10.84</a></span></div>
+
+</body>
+</html>
+
+<div class="modal fade" id="modal-lg" data-keyboard="false" data-backdrop="static" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">
+
+
+                    @if (ViewBag.NoticeTitle != null)
+                    {
+                        <button type="button" class="btn btn-success">
+                            @Html.Raw(ViewBag.NoticeTitle) <span class="badge badge-light"></span>
+                        </button>}
+                </h4>
+
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div id="modalbody" class="modal-body text-center">
+                @if (ViewBag.NoticeTitle != null)
+                {
+                    @Html.Raw(ViewBag.Noticebody)}
+            </div>
+            <div class="modal-footer justify-content-end">
+                <div class="badge badge-light">
+                    @ViewBag.NoticeCreatedOn @@HPUni's Desk
+                </div>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+
+<script asp-append-version="true" src="~/plugins/jquery/jquery.min.js"></script>
+<script asp-append-version="true" src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script asp-append-version="true" src="~/js/adminlte.min.js"></script>
+<script asp-append-version="true" src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+<script asp-append-version="true" src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+<script asp-append-version="true" src="~/js/jquery.unobtrusive-ajax.js"></script>
+<script asp-append-version="true" src="~/scripts/sha256.js"></script>
+<script asp-append-version="true" src="~/js/jqueryconfirm/dist/jquery-confirm.min.js"></script>
+<script asp-append-version="true" src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+<script asp-append-version="true" type="text/javascript">
+
+    $(document).ready(function ()
+    {
+
+        if ('@ViewBag.NoticeTitle' != '')
+        {
+            $('#modal-lg').modal('show');
+        }
+
+        
+
+    });
+
+</script>
+
+
