@@ -21,3 +21,4 @@
 /TicketCore.Web/obj
 /TicketCore.Web/Properties/PublishProfiles
 /TicketCore.Web/TicketCore.Web.csproj.user
+/TicketCore.Web/internal-nlog.txt

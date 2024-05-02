@@ -7,17 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Areas\Administration\Data\**" />
-    <Compile Remove="Areas\Administration\Models\**" />
-    <Content Remove="Areas\Administration\Data\**" />
-    <Content Remove="Areas\Administration\Models\**" />
-    <EmbeddedResource Remove="Areas\Administration\Data\**" />
-    <EmbeddedResource Remove="Areas\Administration\Models\**" />
-    <None Remove="Areas\Administration\Data\**" />
-    <None Remove="Areas\Administration\Models\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
     <PackageReference Include="DNTCaptcha.Core" Version="4.7.2" />
@@ -38,15 +27,6 @@
     <ProjectReference Include="..\TicketCore.Models\TicketCore.Models.csproj" />
     <ProjectReference Include="..\TicketCore.Services\TicketCore.Services.csproj" />
     <ProjectReference Include="..\TicketCore.ViewModels\TicketCore.ViewModels.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Areas\Administrator\Data\" />
-    <Folder Include="Areas\Administrator\Models\" />
-    <Folder Include="Areas\AgentManager\Data\" />
-    <Folder Include="Areas\AgentManager\Models\" />
-    <Folder Include="Areas\User\Data\" />
-    <Folder Include="Areas\User\Models\" />
   </ItemGroup>
 
   <ItemGroup>
