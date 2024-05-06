@@ -1,5 +1,5 @@
 ﻿@{
-    ViewBag.PageName = "Department";
+    ViewBag.PageName = "Phòng ban";
 }
 @using TicketCore.Web.Resources
 @inject LocalizationService LocalizationService
@@ -15,12 +15,12 @@
             <table id="DepartmentDataTable" class="table table-bordered table-hover">
                 <thead>
                     <tr>
-                        <th>DepartmentId</th>
-                        <th>Department</th>
-                        <th>Code</th>
-                        <th>Status</th>
-                        <th>Edit</th>
-                        <th>Delete</th>
+                        <th>Id</th>
+                        <th>Tên phòng ban</th>
+                        <th>Mã phòng ban</th>
+                        <th>@LocalizationService.GetLocalizedHtmlString("Status")</th>
+                        <th>@LocalizationService.GetLocalizedHtmlString("Edit")</th>
+                        <th>@LocalizationService.GetLocalizedHtmlString("Delete")</th>
                     </tr>
                 </thead>
             </table>
@@ -76,11 +76,11 @@
                     { "data": "Code", "name": "Code", "autoWidth": true },
                     { "data": "Status", "name": "Status", "autoWidth": true },
                     {
-                        "render": function (data, type, full, meta) { return '<a class="btn btn-primary" href="/Administration/Department/Edit/' + full.DepartmentId + '"> Edit</a>'; }
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-primary" href="/Administration/Department/Edit/' + full.DepartmentId + '"> Sửa</a>'; }
                     },
                     {
                         "render": function (data, type, full, meta) {
-                            return ' <button type="button" class="btn btn-danger" onclick="Delete(' + full.DepartmentId + ');"> Delete </button>';
+                            return ' <button type="button" class="btn btn-danger" onclick="Delete(' + full.DepartmentId + ');"> Xóa </button>';
                         }
                     }
                 ]
@@ -92,8 +92,8 @@
 
         function Delete(DepartmentId) {
             $.confirm({
-                title: 'Delete!',
-                content: 'Do you want to Delete Menu Department!',
+                title: 'Xóa!',
+                content: 'Xác nhận xóa!',
                 buttons: {
                     confirm: function () {
                         $.ajax({
@@ -121,7 +121,7 @@
                         });
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Hủy!');
                     }
                 }
             });

@@ -58,8 +58,7 @@ namespace TicketCore.Data.Department.Command
             try
             {
                 var departments = _vueTicketDbContext.Department.Find(departmentId);
-                departments.Status = false;
-                _vueTicketDbContext.Entry(departments).State = EntityState.Modified;
+                _vueTicketDbContext.Department.Remove(departments);
                 return _vueTicketDbContext.SaveChanges();
             }
             catch (Exception)

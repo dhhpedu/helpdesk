@@ -9,25 +9,25 @@
             <div class="form-row">
                 <div class="form-group col-md-4">
                     <label class="mandatory" asp-for="FirstName"></label>
-                    <input asp-for="FirstName" placeholder="Enter FirstName" class="form-control" />
+                    <input asp-for="FirstName" placeholder="Nhập họ" class="form-control" />
                     <span class="text-danger" asp-validation-for="FirstName"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label class="mandatory" asp-for="LastName"></label>
-                    <input asp-for="LastName" placeholder="Enter LastName" class="form-control" />
+                    <input asp-for="LastName" placeholder="Nhập tên" class="form-control" />
                     <span class="text-danger" asp-validation-for="LastName"></span>
                 </div>
                 <div class="form-group col-md-4">
                     <label asp-for="Gender"></label>
-                    <input asp-for="Gender" type="radio" value="M" /><label>Male</label>
-                    <input asp-for="Gender" type="radio" value="F" /><label>Female</label>
+                    <input asp-for="Gender" type="radio" value="M" /><label>Nam</label>
+                    <input asp-for="Gender" type="radio" value="F" /><label>Nữ</label>
                     <br />
                     <span class="text-danger" asp-validation-for="Gender"></span>
                 </div>
             </div>
         </div>
         <div class="card-footer">
-            <button type="submit" id="btnsubmit" class="btn btn-success">Save</button>
+            <button type="submit" id="btnsubmit" class="btn btn-success">Lưu</button>
         </div>
     </div>
 </div>

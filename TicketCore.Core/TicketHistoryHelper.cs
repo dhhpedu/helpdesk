@@ -22,7 +22,7 @@ namespace TicketCore.Core
 
             if (priorityId != null && departmentId != null)
             {
-                message = $"Created a new ticket. Set status as {status}, priority as {priorityName}, Department as {DepartmentName}";
+                message = $"Tạo phiếu với trạng thái: {status}, mức độ: {priorityName}, phòng ban: {DepartmentName}";
             }
 
             return message;
@@ -43,24 +43,24 @@ namespace TicketCore.Core
                 || statusId == Convert.ToInt16(StatusMain.Status.Replied)
             )
             {
-                message = $"Set status as {status}";
+                message = $"Cập nhật trạng thái phiếu: {status}";
             }
 
             // Deleted
             if (statusId != null && statusId == Convert.ToInt16(StatusMain.Status.Deleted))
             {
-                message = $"Deleted ticket";
+                message = $"Xóa phiếu";
             }
 
             // Closed
             if (statusId != null && statusId == Convert.ToInt16(StatusMain.Status.Closed))
             {
-                message = $"Closed ticket";
+                message = $"Đóng phiếu";
             }
 
             if (statusId != null && statusId == Convert.ToInt16(StatusMain.Status.ReOpened))
             {
-                message = $"ReOpened ticket";
+                message = $"Mở lại phiếu";
             }
 
 
@@ -75,7 +75,7 @@ namespace TicketCore.Core
             // Deleted
             if (priorityId != null)
             {
-                message = $"Set priority as {priorityName}";
+                message = $"Cập nhật mức độ: {priorityName}";
             }
 
             return message;
@@ -89,7 +89,7 @@ namespace TicketCore.Core
             // Deleted
             if (DepartmentId != null)
             {
-                message = $"Set Department as {departmentName}";
+                message = $"Cập nhật phòng ban: {departmentName}";
             }
 
             return message;
@@ -102,7 +102,7 @@ namespace TicketCore.Core
 
             if (status != null)
             {
-                message = $"Replied,a few seconds ago. And Set status as {status}";
+                message = $"Đã trả lời và cập nhật trạng thái: {status}";
             }
 
             return message;
@@ -110,49 +110,49 @@ namespace TicketCore.Core
 
         public string DeleteTicketReplyMessage()
         {
-            var message = $"Deleted Ticket Reply";
+            var message = $"Xóa câu trả lời";
             return message;
         }
 
         public string EditTicket()
         {
-            var message = "Edited Ticket";
+            var message = "Chỉnh sửa phiếu.";
             return message;
         }
 
         public string EditReplyTicket()
         {
-            var message = "Edited Ticket Reply";
+            var message = "Chỉnh sửa câu trả lời";
             return message;
         }
 
         public string DeleteTicketAttachment(string ticketid)
         {
-            var message = $"Deleted Ticket #{ticketid} Attachment";
+            var message = $"Xóa đính kèm phiếu #{ticketid}";
             return message;
         }
 
         public string DeleteTicketReplyAttachment(string ticketid)
         {
-            var message = "Deleted Ticket #{ticketid} Reply Attachment";
+            var message = "Xóa đính kém câu trả lời phiếu #{ticketid}";
             return message;
         }
 
         public string TicketDelete()
         {
-            var message = "Ticket Deleted";
+            var message = "Xóa phiếu";
             return message;
         }
 
         public string TicketRestore()
         {
-            var message = "Ticket Restored";
+            var message = "Khôi phục phiếu";
             return message;
         }
 
         public string AssignTickettoUser()
         {
-            var message = "Manually Assign Ticket";
+            var message = "Gán phiếu thủ công";
             return message;
         }
 
@@ -185,7 +185,7 @@ namespace TicketCore.Core
         {
             var fromdepartment = GetDepartmentNameByDepartmentId(fromdepartmentId);
             var todepartment = GetDepartmentNameByDepartmentId(todepartmentId);
-            var message = $"Ticket is Transfered from {fromdepartment} to {todepartment}";
+            var message = $"Phiếu được chuyển từ phòng ban {fromdepartment} sang {todepartment}";
             return message;
         }
 

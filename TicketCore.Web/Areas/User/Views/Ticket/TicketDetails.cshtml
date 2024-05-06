@@ -368,7 +368,7 @@
             <div id="Tickethistory" style="height:600px;overflow-y:auto;" class="modal-body">
             </div>
             <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Đóng</button>
 
             </div>
         </div>
@@ -388,85 +388,83 @@
           <text>
   CKEDITOR.replace('Message', { htmlEncodeOutput: true });
           </text>
-      }
-  }
+    }
+        }
 
 
-    $("#btnreply").click(function () {
-        $.confirm({
-                      title: 'Confirmation!',
-            content: 'Do you want to Reply on Ticket?',
-            type: 'green',
-            buttons:
-                          {
-                          confirm: {
-                              text: 'Confirm',
-                    btnClass: 'btn-green',
-                    action: function () {
-                                      data();
-                                      return true;
-                                  },
-                    cancel: function () {
-                        $.alert('Canceled!');
-                                  }
-                              },
-                close: function () {
-                              }
-                          }
-                      });
+        $("#btnreply").click(function () {
+            $.confirm({
+                title: 'Xác nhận!',
+                content: 'Xác nhận trả lời phiếu?',
+                type: 'green',
+                buttons:
+                {
+                    confirm: {
+                        text: 'Confirm',
+                        btnClass: 'btn-green',
+                        action: function () {
+                            data();
+                            return true;
+                        },
+                        cancel: function () {
+                            $.alert('Canceled!');
+                        }
+                    },
+                    close: function () {
+                    }
+                }
+            });
 
-                  });
+        });
 
 
     $("#btnreopenticket").click(function () {
-          $.confirm({
-                      title: 'Confirmation!',
-              content: 'Do you want to ReOpen this Ticket again?',
-              type: 'green',
-              buttons:
-                          {
-                          confirm: {
-                              text: 'Yes',
-                      btnClass: 'btn-green',
-                      action: function ()
-                              {
-                          $("#loader").show();
-                                      var jsonObject =
-                                      {
-                              BugId: $("#BugDetailViewModel_BugId").val()
-                          };
+        $.confirm({
+            title: 'Xác nhận!',
+            content: 'Xác nhận mở lại phiếu?',
+            type: 'green',
+            buttons:
+            {
+                confirm: {
+                    text: 'Yes',
+                    btnClass: 'btn-green',
+                    action: function () {
+                        $("#loader").show();
+                        var jsonObject =
+                        {
+                            BugId: $("#BugDetailViewModel_BugId").val()
+                        };
 
-                          $.ajax({
-                                  type: "POST",
-                              url: "/BugDetails/ChangeStatus",
-                              dataType: "json",
-                              data: jsonObject,
+                        $.ajax({
+                            type: "POST",
+                            url: "/BugDetails/ChangeStatus",
+                            dataType: "json",
+                            data: jsonObject,
 
-                              success: function (data, textStatus, xhr)
-                              {
-                                          location.reload();
-                                      },
-                              error: function (xhr, status, err) {
-                                          if (xhr.status == 400) {
-                                              DisplayModelStateErrors(xhr.responseJSON.ModelState);
-                                          }
-                                      }
-                                  });
+                            success: function (data, textStatus, xhr) {
+                                location.reload();
+                            },
+                            error: function (xhr, status, err) {
+                                if (xhr.status == 400) {
+                                    DisplayModelStateErrors(xhr.responseJSON.ModelState);
+                                }
+                            }
+                        });
 
-                                  return true;
-                              },
-                      cancel: function () {
-                          $.alert('Canceled!');
-                                  location.reload();
-                              }
-                          },
-                  close: function () {
-                              location.reload();
-                          }
-                      }
-                  });
+                        return true;
+                    },
+                    cancel: function () {
+                        $.alert('Canceled!');
+                        location.reload();
+                    }
+                },
+                close: function () {
+                    location.reload();
+                }
+            }
+        });
 
-              });
+    });
 
               function data() {
                   var textboxData = CKEDITOR.instances.Message.getData();
@@ -666,20 +664,20 @@
     function downloadAttachment(ticketId, attachmentsId)
   {
         $.confirm({
-      title: 'Confirmation!',
-            content: 'Do you want to Download Attachment?',
+      title: 'Xác nhận!',
+            content: 'Xác nhận tải tệp tin đính kèm?',
             type: 'blue',
             buttons:
           {
           confirm: {
-              text: 'Confirm',
+              text: 'Xác nhận',
                     btnClass: 'btn-blue',
                     action: function ()
                     {
                         window.location = "/User/Ticket/DownloadAttachMent?attachmentId=" + attachmentsId + "&ticketId=" + ticketId;
                   },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Hủy!');
                   }
               },
                 close: function () {
@@ -692,13 +690,13 @@
     function downloadReplyAttachment(ticketId, attachmentsId)
   {
         $.confirm({
-      title: 'Confirmation!',
-                    content: 'Do you want to Download Attachment?',
+      title: 'Xác nhận!',
+                    content: 'Xác nhận tải tệp tin đính kèm?',
                     type: 'blue',
                     buttons:
           {
           confirm: {
-              text: 'Confirm',
+              text: 'Xác nhận',
                             btnClass: 'btn-blue',
                             action: function ()
                             {
@@ -718,9 +716,9 @@
 
     function deleteAttachment(attachmentsId, ticketId) {
         $.confirm({
-      title: 'Confirmation!',
+      title: 'Xác nhận!',
             type: 'red',
-            content: 'Do you want to Delete Attachment ?',
+            content: 'Xác nhận xóa tệp tin đính kèm?',
             buttons: {
           confirm: function () {
                   if (attachmentsId != "") {
@@ -741,11 +739,11 @@
                             {
           if (data.Status === true)
           {
-                                    $.alert("Attachment Deleted Successfully");
+                                    $.alert("Xóa tệp tin đính kèm thành công!");
               location.reload();
           } else
           {
-                                    $.alert("Something Went Wrong While Deleting Attachment Please Try Again after Sometime!");
+                                    $.alert("Có lỗi xảy ra, vui lòng thử lại!");
                                     $("#loader").hide();
           }
 
@@ -759,7 +757,7 @@
                     }
                 },
                 cancel: function () {
-                    $.alert('Canceled!');
+                    $.alert('Hủy!');
   }
             }
         });
@@ -769,9 +767,9 @@
 
   function deleteReplyAttachment(ticketId, ticketReplyId,attachmentsId) {
       $.confirm({
-          title: 'Confirmation!',
+          title: 'Xác nhận!',
           type: 'red',
-          content: 'Do you want to Delete Attachment ?',
+          content: 'Xác nhận xóa tệp tin đính kèm?',
           buttons: {
               confirm: function () {
                   if (attachmentsId != "") {
@@ -793,11 +791,11 @@
                           {
                               if (data.Status === true)
                               {
-                                  $.alert("Attachment Deleted Successfully");
+                                  $.alert("Xóa tệp tin đính kèm thành công!");
                                   location.reload();
                               } else
                               {
-                                  $.alert("Something Went Wrong While Deleting Attachment Please Try Again after Sometime!");
+                                  $.alert("Có lỗi xảy ra, xin vui lòng thử lại!");
                                   $("#loader").hide();
                               }
 

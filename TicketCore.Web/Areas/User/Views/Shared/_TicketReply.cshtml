@@ -52,11 +52,11 @@
         <div class="card-footer ">
             <div class="form-row">
                 <div class="form-group col-md-3">
-                    <button type="button" id="btnreply" class="btn btn-success"> <i class="fas fa-check-circle"></i> Submit</button>
+                    <button type="button" id="btnreply" class="btn btn-success"> <i class="fas fa-check-circle"></i> Trả lời</button>
 
                     @if ((int)ViewBag.Currentrole == (int)RolesHelper.Roles.Agent)
                     {
-                        <a asp-area="User" class="btn btn-primary" asp-controller="MyTicket" asp-action="AllTickets"><i class="fas fa-ban"></i> Cancel</a>
+                        <a asp-area="User" class="btn btn-primary" asp-controller="MyTicket" asp-action="AllTickets"><i class="fas fa-ban"></i> Hủy</a>
                     }
 
 

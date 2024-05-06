@@ -21,6 +21,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketCore.Services", "Tick
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TicketCore.Core", "TicketCore.Core\TicketCore.Core.csproj", "{C49F3EE7-09C7-4246-948B-321811BFC442}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Docs", "Docs", "{103E641E-E2D9-48AB-87E7-EF81D6B956BB}"
+	ProjectSection(SolutionItems) = preProject
+		Account.md = Account.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

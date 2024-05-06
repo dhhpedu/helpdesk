@@ -316,7 +316,7 @@
     <value>Người yêu cầu</value>
   </data>
   <data name="Role" xml:space="preserve">
-    <value>Luật</value>
+    <value>Quyền</value>
   </data>
   <data name="RoleName" xml:space="preserve">
     <value>Tên luật</value>

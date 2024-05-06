@@ -139,7 +139,7 @@
             <!-- form start -->
             <div class="card-body register-card-body">
                 <button type="button" id="btnsubmit" class="btn btn-success"> <i class="fas fa-check-circle"></i> Submit</button>
-                <a asp-area="Administrator" class="btn btn-primary" asp-controller="MyTicket" asp-action="AllTickets"><i class="fas fa-ban"></i> Cancel</a>
+                <a asp-area="Administrator" class="btn btn-primary" asp-controller="MyTicket" asp-action="AllTickets"><i class="fas fa-ban"></i> Hủy</a>
             </div>
         </div>
     </form>
@@ -164,9 +164,9 @@
                         });
                     } else {
                         $.confirm({
-                            title: 'Confirmation!',
+                            title: 'Xác nhận!',
                             type: 'green',
-                            content: 'Do you want to Create Ticket?',
+                            content: 'Xác nhận tạo phiếu?',
                             buttons: {
                                 confirm: function () {
                                     $("#loader").show();
