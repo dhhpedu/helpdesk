@@ -93,10 +93,10 @@
                     {
                         "render": function (data, type, full, meta) {
                             if (full.Status == "Active") {
-                                return '<button type="button" class="btn btn-success" onclick="Delete(' + full.DepartmentConfigrationId + ');">  Active  </button>';
+                                return '<button type="button" class="btn btn-success" onclick="Delete(' + full.DepartmentConfigrationId + ');">  Đang hoạt động  </button>';
                             }
                             if (full.Status == "InActive") {
-                                return '<button type="button" class="btn btn-danger" onclick="Delete(' + full.DepartmentConfigrationId + ');">  InActive </button>';
+                                return '<button type="button" class="btn btn-danger" onclick="Delete(' + full.DepartmentConfigrationId + ');">  Không hoạt động </button>';
                             }
                         }
                     }
@@ -135,7 +135,7 @@
                         });
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 }
             });

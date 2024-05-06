@@ -298,7 +298,7 @@ namespace TicketCore.Web.Areas.User.Controllers
 
                     new BarCharDataViewModel.Dataset()
                     {
-                        label = "Resolved Ticket",
+                        label = "Phiếu đã xử lý",
                         backgroundColor = "#83e7a8",
                         borderColor = "rgb(54, 162, 235)",
                         pointRadius = false,
@@ -310,7 +310,7 @@ namespace TicketCore.Web.Areas.User.Controllers
                     },
                     new BarCharDataViewModel.Dataset()
                     {
-                        label = "Created Ticket",
+                        label = "Phiếu đã tạo",
                         backgroundColor = "#99ccff",
                         borderColor = "rgb(75, 192, 192)",
                         pointRadius = false,
@@ -349,7 +349,7 @@ namespace TicketCore.Web.Areas.User.Controllers
             }
             else
             {
-                _notificationService.DangerNotification("Message","Something Went Wrong Please try to refesh page and try Again.");
+                _notificationService.DangerNotification("Message","Đã có lỗi xảy ra, xin vui lòng thử lại.");
                 return RedirectToAction("Dashboard", "MyDashboard");
             }
 

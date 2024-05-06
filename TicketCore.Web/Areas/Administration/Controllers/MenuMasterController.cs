@@ -58,7 +58,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                     new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     }
                 }
             };
@@ -76,7 +76,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                     new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     }
                 };
 
@@ -156,7 +156,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                     new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     }
                 };
                 return View(menuMaster);
@@ -179,7 +179,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                     new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     }
                 };
 
@@ -215,7 +215,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                             new SelectListItem()
                             {
                                 Value = "",
-                                Text = "-----Select-----"
+                                Text = "-----Chọn-----"
                             }
                         };
                         return View(editmenuMaster);

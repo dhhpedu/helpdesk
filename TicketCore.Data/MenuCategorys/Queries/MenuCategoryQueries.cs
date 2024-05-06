@@ -67,7 +67,7 @@ namespace TicketCore.Data.MenuCategorys.Queries
             categoryList.Insert(0, new SelectListItem()
             {
                 Value = "",
-                Text = "-----Select-----"
+                Text = "-----Chọn-----"
             });
 
             return categoryList;

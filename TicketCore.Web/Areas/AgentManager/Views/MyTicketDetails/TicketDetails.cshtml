@@ -60,7 +60,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                        First Response Overdue | @Model.TicketDetailViewModel.FirstResponseDue
+                        Phản hồi quá hạn đầu tiên | @Model.TicketDetailViewModel.FirstResponseDue
                     </div>
                 }
 
@@ -69,7 +69,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Resolution Due!</h5>
-                        Resolution Response Overdue | @Model.TicketDetailViewModel.ResolutionDue
+                        Giải quyết quá hạn | @Model.TicketDetailViewModel.ResolutionDue
                     </div>
                 }
 
@@ -78,7 +78,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Every Response Status!</h5>
-                        Every Response Overdue | @Model.TicketDetailViewModel.EveryResponseStatus
+                        Tất cả phản hồi bị quá hạn | @Model.TicketDetailViewModel.EveryResponseStatus
                     </div>
 
                 }
@@ -95,8 +95,8 @@
                 {
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Alert Escalation Stage 2 !</h5>
-                        Escalation Stage 2 | @Model.TicketDetailViewModel.EscalationDate2
+                        <h5><i class="icon fas fa-ban"></i> Hỗ trợ mức 2 !</h5>
+                        Hỗ trợ mức 2 | @Model.TicketDetailViewModel.EscalationDate2
                     </div>
 
                 }
@@ -454,7 +454,7 @@
                         return true;
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 },
                 close: function () {
@@ -467,7 +467,7 @@
 
     $("#btnreopenticket").click(function () {
         $.confirm({
-            title: 'Confirmation!',
+            title: 'Xác nhận!',
             content: 'Do you want to ReOpen this Ticket again?',
             type: 'green',
             buttons:
@@ -503,7 +503,7 @@
                                                     location.reload();
                                                 },
                                                 cancel: function () {
-                                                    $.alert('Canceled!');
+                                                    $.alert('Đã hủy!');
                                                 }
                                             }
                                         }
@@ -523,7 +523,7 @@
                         return true;
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                         location.reload();
                     }
                 },
@@ -597,7 +597,7 @@
     $(document).ready(function () {
         $("#PriorityId").change(function () {
             $.confirm({
-                title: 'Confirmation!',
+                title: 'Xác nhận!',
                 content: 'Are you sure you want to change Priority this?',
                 type: 'green',
                 buttons:
@@ -636,7 +636,7 @@
                                                         location.reload();
                                                     },
                                                     cancel: function () {
-                                                        $.alert('Canceled!');
+                                                        $.alert('Đã hủy!');
                                                     }
                                                 }
                                             }
@@ -652,7 +652,7 @@
                             return true;
                         },
                         cancel: function () {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                             location.reload();
                         }
                     },
@@ -666,7 +666,7 @@
         $("#AssignedToId").change(function ()
         {
             $.confirm({
-                title: 'Confirmation!',
+                title: 'Xác nhận!',
                 content: 'Are you sure you want to change Assigned Developer ?',
                 type: 'green',
                 buttons:
@@ -711,7 +711,7 @@
                             }
                         },
                         cancel: function () {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                             location.reload();
                         }
                     },
@@ -771,7 +771,7 @@
     function downloadAttachment(ticketId, attachmentsId)
     {
         $.confirm({
-            title: 'Confirmation!',
+            title: 'Xác nhận!',
             content: 'Do you want to Download Attachment?',
             type: 'blue',
             buttons:
@@ -784,7 +784,7 @@
                         window.location = "/AgentManager/MyTicketDetails/DownloadAttachMent?attachmentId=" + attachmentsId + "&ticketId=" + ticketId;
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 },
                 close: function () {
@@ -797,7 +797,7 @@
     function downloadReplyAttachment(ticketId, attachmentsId)
     {
         $.confirm({
-                    title: 'Confirmation!',
+                    title: 'Xác nhận!',
                     content: 'Do you want to Download Attachment?',
                     type: 'blue',
                     buttons:
@@ -810,7 +810,7 @@
                                 window.location = "/AgentManager/MyTicketDetails/DownloadReplyAttachment?attachmentId=" + attachmentsId + "&ticketId=" + ticketId;
                             },
                             cancel: function () {
-                                $.alert('Canceled!');
+                                $.alert('Đã hủy!');
                             }
                         },
                         close: function () {
@@ -823,7 +823,7 @@
 
     function deleteAttachment(attachmentsId, ticketId) {
         $.confirm({
-            title: 'Confirmation!',
+            title: 'Xác nhận!',
             type: 'red',
             content: 'Do you want to Delete Attachment ?',
             buttons: {
@@ -864,7 +864,7 @@
                     }
                 },
                 cancel: function () {
-                    $.alert('Canceled!');
+                    $.alert('Đã hủy!');
                 }
             }
         });
@@ -874,7 +874,7 @@
 
     function deleteReplyAttachment(ticketId, ticketReplyId,attachmentsId) {
         $.confirm({
-            title: 'Confirmation!',
+            title: 'Xác nhận!',
             type: 'red',
             content: 'Do you want to Delete Attachment ?',
             buttons: {
@@ -916,7 +916,7 @@
                     }
                 },
                 cancel: function () {
-                    $.alert('Canceled!');
+                    $.alert('Đã hủy!');
                 }
             }
         });

@@ -50,7 +50,7 @@
                 </div>
                 <div class="form-group col-md-3">
                     <label class="mandatory" asp-for="Search"></label>
-                    <input asp-for="Search" placeholder="Enter Search" class="form-control" />
+                    <input asp-for="Search" placeholder="Nhập từ khóa" class="form-control" />
                     <span class="text-danger" asp-validation-for="Search"></span>
                 </div>
             </div>
@@ -58,8 +58,8 @@
 
         </div>
         <div class="card-footer">
-            <input id="btnsubmit" class="btn btn-success" type="submit" value="Search" />
-            <input id="btnclear" class="btn btn-primary" type="button" value="Clear" />
+            <input id="btnsubmit" class="btn btn-success" type="submit" value="Tìm kiếm" />
+            <input id="btnclear" class="btn btn-primary" type="button" value="Hủy" />
         </div>
     </div>
     <div class="card  card-outline">
@@ -267,7 +267,7 @@
                     {
                         <tr>
                             <td colspan="9">
-                                <i class="far fa-smile"></i>Chưa có phiếu.
+                                <i class="far fa-smile mr-2"></i>Chưa có phiếu.
                             </td>
                         </tr>
                     }
@@ -290,15 +290,15 @@
 
             $("#btnclear").click(function() {
                 $.confirm({
-                    title: 'Confirmation!',
+                    title: 'Xác nhận!',
                     type: 'green',
-                    content: 'Do you want to Clear Filters?',
+                    content: 'Xác nhận xóa bộ lọc?',
                     buttons: {
                         confirm: function() {
                             window.location = '/Administrator/MyTicket/AllClosedTickets';
                         },
                         cancel: function() {
-                            $.alert('Canceled!');
+                            $.alert('Hủy!');
                         }
                     }
                 });

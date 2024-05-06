@@ -63,7 +63,7 @@ namespace TicketCore.Data.BusinessHours.Queries
             listbt.Insert(0, new SelectListItem()
             {
                 Value = "",
-                Text = "-----Select-----"
+                Text = "-----Chọn-----"
             });
             return listbt.ToList();
         }
@@ -95,7 +95,7 @@ namespace TicketCore.Data.BusinessHours.Queries
                                  BusinessHoursName = bt.BusinessHoursName,
                                  CreatedOn = bh.CreatedOn,
                                  BusinessHoursId = bh.BusinessHoursId,
-                                 Status =bh.Status == true ? "Active" : "InActive",
+                                 Status = bh.Status == true ? "Active" : "InActive",
                              }).AsQueryable();
 
 

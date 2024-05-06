@@ -128,10 +128,10 @@
                     {
                         "render": function (data, type, full, meta) {
                             if (full.Status == "Active") {
-                                return '<button type="button" class="btn btn-success" onclick="Delete(' + full.UserId + ',' + false + ');">  Active  </button>';
+                                return '<button type="button" class="btn btn-success" onclick="Delete(' + full.UserId + ',' + false + ');">  Đang hoạt động  </button>';
                             }
                             if (full.Status == "InActive") {
-                                return '<button type="button" class="btn btn-danger" onclick="Delete(' + full.UserId + ',' + true + ');">  InActive </button>';
+                                return '<button type="button" class="btn btn-danger" onclick="Delete(' + full.UserId + ',' + true + ');">  Không hoạt động </button>';
                             }
                         }
                     }
@@ -141,8 +141,8 @@
 
         function Delete(userId, status) {
             $.confirm({
-                title: 'Change Status!',
-                content: 'Do you want to Change Status!',
+                title: 'Đổi trạng thái!',
+                content: 'Xác nhận đổi trạng thái!',
                 buttons: {
                     confirm: function () {
                         $.ajax({
@@ -170,7 +170,7 @@
                         });
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 }
             });

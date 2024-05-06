@@ -24,7 +24,7 @@ namespace TicketCore.Data.Knowledgebase.Queries
             knowledgebaseTypeList.Insert(0, new SelectListItem()
             {
                 Value = "",
-                Text = "-----Select-----"
+                Text = "-----Chọn-----"
             });
 
             return knowledgebaseTypeList;

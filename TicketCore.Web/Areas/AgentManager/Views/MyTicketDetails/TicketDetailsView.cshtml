@@ -51,7 +51,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Resolution Due!</h5>
-                        Resolution Response Overdue | @Model.TicketDetailViewModel.ResolutionDue
+                        Giải quyết quá hạn | @Model.TicketDetailViewModel.ResolutionDue
                     </div>
                 }
 
@@ -60,7 +60,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Every Response Status!</h5>
-                        Every Response Overdue | @Model.TicketDetailViewModel.EveryResponseStatus
+                        Tất cả phản hồi bị quá hạn | @Model.TicketDetailViewModel.EveryResponseStatus
                     </div>
 
                 }
@@ -69,7 +69,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Escalation Stage 1 !</h5>
-                        Escalation Stage 1 | @Model.TicketDetailViewModel.EscalationDate1
+                        Hỗ trợ mức 1 | @Model.TicketDetailViewModel.EscalationDate1
                     </div>
 
                 }
@@ -77,8 +77,8 @@
                 {
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Alert Escalation Stage 2 !</h5>
-                        Escalation Stage 2 | @Model.TicketDetailViewModel.EscalationDate2
+                        <h5><i class="icon fas fa-ban"></i> Hỗ trợ mức 2 !</h5>
+                        Hỗ trợ mức 2 | @Model.TicketDetailViewModel.EscalationDate2
                     </div>
 
                 }
@@ -368,7 +368,7 @@
 
     function downloadAttachment(ticketId, attachmentsId) {
         $.confirm({
-            title: 'Confirmation!',
+            title: 'Xác nhận!',
             content: 'Do you want to Download Attachment?',
             type: 'blue',
             buttons:
@@ -380,7 +380,7 @@
                         window.location = "/AgentManager/MyTicketDetails/DownloadAttachMent?attachmentId=" + attachmentsId + "&ticketId=" + ticketId;
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 },
                 close: function () {
@@ -392,7 +392,7 @@
 
     function downloadReplyAttachment(ticketId, attachmentsId) {
         $.confirm({
-            title: 'Confirmation!',
+            title: 'Xác nhận!',
             content: 'Do you want to Download Attachment?',
             type: 'blue',
             buttons:
@@ -404,7 +404,7 @@
                         window.location = "/AgentManager/MyTicketDetails/DownloadReplyAttachment?attachmentId=" + attachmentsId + "&ticketId=" + ticketId;
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 },
                 close: function () {

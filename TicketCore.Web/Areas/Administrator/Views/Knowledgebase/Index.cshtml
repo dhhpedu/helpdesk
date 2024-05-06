@@ -99,15 +99,15 @@
                         "render": function (data, type, full, meta) {
 
                             if (full.Status == "Active") {
-                                return '<button type="button" class="btn btn-success" onclick="Delete(' + full.KnowledgebaseId + ',' + false + ');">  Active  </button>';
+                                return '<button type="button" class="btn btn-success" onclick="Delete(' + full.KnowledgebaseId + ',' + false + ');">  Đang hoạt động  </button>';
                             }
                             if (full.Status == "InActive") {
-                                return '<button type="button" class="btn btn-danger" onclick="Delete(' + full.KnowledgebaseId + ',' + true + ');">  InActive </button>';
+                                return '<button type="button" class="btn btn-danger" onclick="Delete(' + full.KnowledgebaseId + ',' + true + ');">  Không hoạt động </button>';
                             }
                         }
                     },
                     {
-                        "render": function (data, type, full, meta) { return '<a class="btn btn-primary" href="/Administrator/Knowledgebase/Edit/' + full.KnowledgebaseId + '"> Edit</a>'; }
+                        "render": function (data, type, full, meta) { return '<a class="btn btn-primary" href="/Administrator/Knowledgebase/Edit/' + full.KnowledgebaseId + '"> Sửa</a>'; }
                     }
 
                 ]
@@ -116,8 +116,8 @@
 
         function Delete(KnowledgebaseId, status) {
             $.confirm({
-                title: 'Change Status!',
-                content: 'Do you want to Change Status!',
+                title: 'Đổi trạng thái!',
+                content: 'Xác nhận đổi trạng thái!',
                 buttons: {
                     confirm: function () {
                         $.ajax({
@@ -145,7 +145,7 @@
                         });
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 }
             });

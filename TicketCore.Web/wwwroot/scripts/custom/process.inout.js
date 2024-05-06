@@ -1,6 +1,6 @@
 ﻿function processin() {
     $.confirm({
-        title: 'Confirmation!',
+        title: 'Xác nhận!',
         type: 'green',
         content: 'Do you want to Check-In for day?',
         buttons: {
@@ -38,7 +38,7 @@
                 $("#loader").hide();
             },
             cancel: function () {
-                $.alert('Canceled!');
+                $.alert('Đã hủy!');
                 $("#loader").hide();
             }
         }
@@ -54,7 +54,7 @@
 function processout() {
 
     $.confirm({
-        title: 'Confirmation!',
+        title: 'Xác nhận!',
         type: 'red',
         content: 'Do you want to Check-Out ?',
         buttons: {
@@ -86,7 +86,7 @@ function processout() {
                 });
             },
             cancel: function () {
-                $.alert('Canceled!');
+                $.alert('Đã hủy!');
                 $("#loader").hide();
             }
         }

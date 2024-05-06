@@ -56,10 +56,10 @@ namespace TicketCore.Web.Areas.Administration.Controllers
             {
                 var subMenu = new CreateSubMenuMasterViewModel();
                 subMenu.ListofMenus = new List<SelectListItem>()
-                    {new SelectListItem() {Value = "", Text = "-----Select-----"}};
+                    {new SelectListItem() {Value = "", Text = "-----Chọn-----"}};
                 subMenu.ListofMenuCategory = new List<SelectListItem>()
                 {
-                    new SelectListItem() {Value = "", Text = "-----Select-----"}
+                    new SelectListItem() {Value = "", Text = "-----Chọn-----"}
                 };
                 subMenu.ListofRoles = _roleQueries.ListofRoles();
 
@@ -77,10 +77,10 @@ namespace TicketCore.Web.Areas.Administration.Controllers
         {
 
             subMenu.ListofMenus = new List<SelectListItem>()
-                {new SelectListItem() {Value = "", Text = "-----Select-----"}};
+                {new SelectListItem() {Value = "", Text = "-----Chọn-----"}};
             subMenu.ListofMenuCategory = new List<SelectListItem>()
             {
-                new SelectListItem() {Value = "", Text = "-----Select-----"}
+                new SelectListItem() {Value = "", Text = "-----Chọn-----"}
             };
             subMenu.ListofRoles = _roleQueries.ListofRoles();
 
@@ -154,10 +154,10 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                 var submenuMaster = _subMenuMasterQueries.GetSubMenuById(id);
                 submenuMaster.ListofRoles = _roleQueries.ListofRoles();
                 submenuMaster.ListofMenus = new List<SelectListItem>()
-                    {new SelectListItem() {Value = "", Text = "-----Select-----"}};
+                    {new SelectListItem() {Value = "", Text = "-----Chọn-----"}};
                 submenuMaster.ListofMenuCategory = new List<SelectListItem>()
                 {
-                    new SelectListItem() {Value = "", Text = "-----Select-----"}
+                    new SelectListItem() {Value = "", Text = "-----Chọn-----"}
                 };
 
                 return View(submenuMaster);
@@ -180,7 +180,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                     new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     }
                 };
                 subMenuMasterVm.ListofMenus = new List<SelectListItem>()
@@ -188,7 +188,7 @@ namespace TicketCore.Web.Areas.Administration.Controllers
                     new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     }
                 };
 

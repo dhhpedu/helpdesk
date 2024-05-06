@@ -349,15 +349,15 @@
 
             $("#btnclear").click(function() {
                 $.confirm({
-                    title: 'Confirmation!',
+                    title: 'Xác nhận!',
                     type: 'green',
-                    content: 'Do you want to Clear Filters?',
+                    content: 'Bạn có muốn xóa bộ lọc?',
                     buttons: {
                         confirm: function() {
                             window.location = '/AgentManager/MyTicket/AllTickets';
                         },
                         cancel: function() {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                         }
                     }
                 });
@@ -374,7 +374,7 @@
                     return false;
                 } else {
                     $.confirm({
-                        title: 'Confirmation!',
+                        title: 'Xác nhận!',
                         type: 'green',
                         content: 'Do you want to Change Department?',
                         buttons: {
@@ -401,7 +401,7 @@
                                                         window.location = '/AgentManager/MyTicket/AllTickets';
                                                     },
                                                     cancel: function() {
-                                                        $.alert('Canceled!');
+                                                        $.alert('Đã hủy!');
                                                     }
                                                 }
                                             });
@@ -424,7 +424,7 @@
                                 });
                             },
                             cancel: function() {
-                                $.alert('Canceled!');
+                                $.alert('Đã hủy!');
                             }
                         }
                     });
@@ -558,7 +558,7 @@
                             deleterequest(id);
                         },
                         cancel: function() {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                         }
                     }
                 });
@@ -581,7 +581,7 @@
                             deleteundorequest(id);
                         },
                         cancel: function() {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                         }
                     }
                 });

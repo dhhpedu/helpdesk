@@ -1,6 +1,6 @@
 ﻿@model TicketCore.ViewModels.SmtpEmailSettings.SmtpEmailSettingsViewModel
 @{
-    ViewBag.PageName = "General Settings";
+    ViewBag.PageName = "Cài đặt chung";
 }
 <div class="col-md-12">
     <div class="card">
@@ -69,9 +69,9 @@
             <!-- /.card-body -->
 
             <div class="card-footer">
-                <button type="submit" class="btn btn-success">Save</button>
-                <a asp-area="Administration" class="btn btn-danger" asp-controller="ApplicationSetting" asp-action="SmtpSettings">Clear</a>
-                <a asp-area="Administration" class="btn btn-primary" asp-controller="ApplicationSetting" asp-action="Index">List</a>
+                <button type="submit" class="btn btn-success">Lưu</button>
+                <a asp-area="Administration" class="btn btn-danger" asp-controller="ApplicationSetting" asp-action="SmtpSettings">Hủy</a>
+                <a asp-area="Administration" class="btn btn-primary" asp-controller="ApplicationSetting" asp-action="Index">Danh sách</a>
 
             </div>
         </form>

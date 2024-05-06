@@ -1,12 +1,12 @@
 ﻿@model TicketCore.ViewModels.Masters.BusinessHoursDetailsViewModel
 @{
-    ViewBag.PageName = "Business Hours";
+    ViewBag.PageName = "Giờ làm việc";
 }
 
 <div class="col-md-12">
     <div class="card">
         <div class="card-header">
-            <h3 class="card-title">Add </h3>
+            <h3 class="card-title">Thêm mới </h3>
         </div>
         <!-- /.card-header -->
         <!-- form start -->
@@ -15,17 +15,17 @@
                 <div class="form-row">
                     <div class="form-group col-md-4">
                         <label  class="mandatory" asp-for="Name"></label>
-                        <input asp-for="Name" placeholder="Enter Name" class="form-control" />
+                        <input asp-for="Name" placeholder="Nhập tên" class="form-control" />
                         <span class="text-danger" asp-validation-for="Name"></span>
                     </div>
                     <div class="form-group col-md-4">
                         <label  class="mandatory" asp-for="Description"></label>
-                        <input asp-for="Description" placeholder="Enter LastName" class="form-control" />
+                        <input asp-for="Description" placeholder="Nhập mô tả" class="form-control" />
                         <span class="text-danger" asp-validation-for="Description"></span>
                     </div>
                     <div class="form-check">
                         <input type="checkbox" asp-for="Status" class="form-check-input" />
-                        <label class="form-check-label" asp-for="Status">Active</label>
+                        <label class="form-check-label" asp-for="Status">Hoạt động</label>
                         <span class="text-danger" asp-validation-for="Status"></span>
                     </div>
                 </div>
@@ -226,11 +226,11 @@
             }
 
             if (statusflag == false) {
-                alert("Please Select Valid time");
+                alert("Giờ làm việc không hợp lệ");
             }
 
             if (statusflag == true) {
-                if (confirm("Are you sure you want to save this?")) {
+                if (confirm("Xác nhận lưu?")) {
                     statusflag = true;
                 } else {
                     statusflag = false;
@@ -238,7 +238,7 @@
             }
             return statusflag;
         } else {
-            alert("Please Enter Details to Business Hours");
+            alert("Vui lòng nhập chi tiết cho giờ làm việc");
             return false;
         }
 
@@ -307,7 +307,7 @@
         _parent.find(".time_validate").data("validtime", _condition);
 
         return _condition ?
-            calculate_duration(_time_array) : "<a href='#' class='error'></a>Please enter a valid time"
+            calculate_duration(_time_array) : "<a href='#' class='error'></a>Thời gian không hợp lệ"
 
     }
 

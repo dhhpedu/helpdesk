@@ -239,7 +239,7 @@ namespace TicketCore.Web.Areas.Administrator.Controllers
                 list.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return Json(list);

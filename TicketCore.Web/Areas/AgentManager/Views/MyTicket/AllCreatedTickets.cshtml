@@ -283,15 +283,15 @@
 
             $("#btnclear").click(function () {
                 $.confirm({
-                    title: 'Confirmation!',
+                    title: 'Xác nhận!',
                     type: 'green',
-                    content: 'Do you want to Clear Filters?',
+                    content: 'Bạn có muốn xóa bộ lọc?',
                     buttons: {
                         confirm: function () {
                             window.location = '/AgentManager/MyTicket/AllCreatedTickets';
                         },
                         cancel: function () {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                         }
                     }
                 });

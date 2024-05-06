@@ -282,7 +282,7 @@ namespace TicketCore.Web.Areas.Administrator.Controllers
 
                     new BarCharDataViewModel.Dataset()
                     {
-                        label = "Resolved Ticket",
+                        label = "Phiếu đã xử lý",
                         backgroundColor = "#83e7a8",
                         borderColor = "rgb(54, 162, 235)",
                         pointRadius = false,
@@ -294,7 +294,7 @@ namespace TicketCore.Web.Areas.Administrator.Controllers
                     },
                     new BarCharDataViewModel.Dataset()
                     {
-                        label = "Created Ticket",
+                        label = "Phiếu đã tạo",
                         backgroundColor = "#99ccff",
                         borderColor = "rgb(75, 192, 192)",
                         pointRadius = false,

@@ -285,8 +285,11 @@
                     type: 'green',
                     content: 'Bạn có muốn huỷ điều kiện lọc?',
                     buttons: {
-                        confirm: function () {
-                            window.location = '/User/Ticket/AllTickets';
+                        confirm: {
+                            text: 'Xác nhận',
+                            action: function () {
+                                window.location = '/User/Ticket/AllTickets';
+                            }
                         },
                         cancel: function () {
                             $.alert('Đã huỷ!');

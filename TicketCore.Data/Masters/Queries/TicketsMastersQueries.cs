@@ -27,7 +27,7 @@ namespace TicketCore.Data.Masters.Queries
                 overdueTypeList.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return overdueTypeList;

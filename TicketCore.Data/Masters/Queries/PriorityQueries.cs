@@ -42,7 +42,7 @@ namespace TicketCore.Data.Masters.Queries
                     priorityList.Insert(0, new SelectListItem()
                     {
                         Value = "",
-                        Text = "-----Select-----"
+                        Text = "-----Chọn-----"
                     });
 
                     MemoryCacheEntryOptions cacheExpirationOptions = new MemoryCacheEntryOptions

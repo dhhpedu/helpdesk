@@ -133,7 +133,7 @@
                     });
                 } else {
                     $.confirm({
-                        title: 'Confirmation!',
+                        title: 'Xác nhận!',
                         type: 'green',
                         content: 'Do you want to Update Details ?',
                         buttons: {
@@ -142,7 +142,7 @@
                                 $('#ticketform').submit();
                             },
                             cancel: function () {
-                                $.alert('Canceled!');
+                                $.alert('Đã hủy!');
                             }
                         }
                     });
@@ -156,7 +156,7 @@
 
         function deleteAttachment(attachmentsId, ticketId) {
             $.confirm({
-                title: 'Confirmation!',
+                title: 'Xác nhận!',
                 type: 'red',
                 content: 'Do you want to Delete Attachment ?',
                 buttons: {
@@ -191,7 +191,7 @@
                         }
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                     }
                 }
             });

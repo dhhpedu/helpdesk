@@ -59,7 +59,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert!</h5>
-                        First Response Overdue | @Model.TicketDetailViewModel.FirstResponseDue
+                        Phản hồi quá hạn đầu tiên | @Model.TicketDetailViewModel.FirstResponseDue
                     </div>
                 }
 
@@ -68,7 +68,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Resolution Due!</h5>
-                        Resolution Response Overdue | @Model.TicketDetailViewModel.ResolutionDue
+                        Giải quyết quá hạn | @Model.TicketDetailViewModel.ResolutionDue
                     </div>
                 }
 
@@ -77,7 +77,7 @@
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
                         <h5><i class="icon fas fa-ban"></i> Alert Every Response Status!</h5>
-                        Every Response Overdue | @Model.TicketDetailViewModel.EveryResponseStatus
+                        Tất cả phản hồi bị quá hạn | @Model.TicketDetailViewModel.EveryResponseStatus
                     </div>
 
                 }
@@ -85,8 +85,8 @@
                 {
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Alert Escalation Stage 1 !</h5>
-                        Escalation Stage 1 | @Model.TicketDetailViewModel.EscalationDate1
+                        <h5><i class="icon fas fa-ban"></i> Hỗ trợ mức 1 !</h5>
+                        Hỗ trợ mức 1 | @Model.TicketDetailViewModel.EscalationDate1
                     </div>
 
                 }
@@ -94,8 +94,8 @@
                 {
                     <div class="alert alert-danger alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                        <h5><i class="icon fas fa-ban"></i> Alert Escalation Stage 2 !</h5>
-                        Escalation Stage 2 | @Model.TicketDetailViewModel.EscalationDate2
+                        <h5><i class="icon fas fa-ban"></i> Hỗ trợ mức 2 !</h5>
+                        Hỗ trợ mức 2 | @Model.TicketDetailViewModel.EscalationDate2
                     </div>
 
                 }
@@ -407,7 +407,7 @@
                             return true;
                         },
                         cancel: function () {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                         }
                     },
                     close: function () {
@@ -454,7 +454,7 @@
                         return true;
                     },
                     cancel: function () {
-                        $.alert('Canceled!');
+                        $.alert('Đã hủy!');
                         location.reload();
                     }
                 },
@@ -529,7 +529,7 @@
     $(document).ready(function () {
         $("#PriorityId").change(function () {
             $.confirm({
-          title: 'Confirmation!',
+          title: 'Xác nhận!',
                 content: 'Are you sure you want to change Priority this?',
                 type: 'green',
                 buttons:
@@ -568,7 +568,7 @@
                                                   location.reload();
                                               },
                                                     cancel: function () {
-                                                        $.alert('Canceled!');
+                                                        $.alert('Đã hủy!');
                                               }
                                           }
                                       }
@@ -584,7 +584,7 @@
                       return true;
                   },
                         cancel: function () {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                       location.reload();
                   }
               },
@@ -598,7 +598,7 @@
         $("#AssignedToId").change(function ()
         {
             $.confirm({
-      title: 'Confirmation!',
+      title: 'Xác nhận!',
                 content: 'Are you sure you want to change Assigned Developer ?',
                 type: 'green',
                 buttons:
@@ -643,7 +643,7 @@
                   }
               },
                         cancel: function () {
-                            $.alert('Canceled!');
+                            $.alert('Đã hủy!');
                   location.reload();
               }
           },
@@ -703,7 +703,7 @@
                                 window.location = "/User/Ticket/DownloadReplyAttachment?attachmentId=" + attachmentsId + "&ticketId=" + ticketId;
                   },
                             cancel: function () {
-                                $.alert('Canceled!');
+                                $.alert('Đã hủy!');
                   }
               },
                         close: function () {
@@ -809,7 +809,7 @@
                   }
               },
               cancel: function () {
-                  $.alert('Canceled!');
+                  $.alert('Đã hủy!');
               }
           }
       });

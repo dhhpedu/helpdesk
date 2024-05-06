@@ -18,13 +18,13 @@ namespace TicketCore.ViewModels.CategoryConfigrations
         public List<SelectListItem> ListofHod { get; set; }
 
 
-        [DisplayName("BusinessHours")]
-        [Required(ErrorMessage = "Please Select BusinessHours")]
+        [DisplayName("Giờ làm việc")]
+        [Required(ErrorMessage = "Vui lòng chọn giờ làm việc")]
         public int? BusinessHoursId { get; set; }
         public List<SelectListItem> ListofBusinessHours { get; set; }
 
-        [DisplayName("Department")]
-        [Required(ErrorMessage = "Please Select Department.")]
+        [DisplayName("Phòng/Ban")]
+        [Required(ErrorMessage = "Vui lòng chọn Phòng/Ban")]
         public int DepartmentId { get; set; }
         public List<SelectListItem> ListofDepartment { get; set; }
 
@@ -45,13 +45,13 @@ namespace TicketCore.ViewModels.CategoryConfigrations
         public long HodUserId { get; set; }
         public List<SelectListItem> ListofHod { get; set; }
 
-        [DisplayName("Business Hours")]
-        [Required(ErrorMessage = "Please Select BusinessHours")]
+        [DisplayName("Giờ làm việc")]
+        [Required(ErrorMessage = "Vui lòng chọn giờ làm việc")]
         public int? BusinessHoursId { get; set; }
         public List<SelectListItem> ListofBusinessHours { get; set; }
 
-        [DisplayName("Department")]
-        [Required(ErrorMessage = "Please Select Department.")]
+        [DisplayName("Phòng/Ban")]
+        [Required(ErrorMessage = "Vui lòng chọn Phòng/Ban")]
         public int? DepartmentId { get; set; }
         public List<SelectListItem> ListofDepartment { get; set; }
 

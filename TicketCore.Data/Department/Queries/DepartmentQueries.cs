@@ -34,7 +34,7 @@ namespace TicketCore.Data.Department.Queries
                 departmentList.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return departmentList;
@@ -164,7 +164,7 @@ namespace TicketCore.Data.Department.Queries
 
                                            select new DepartmentGridViewModel()
                                            {
-                                               Status = department.Status == true ? "Active" : "InActive",
+                                               Status = department.Status == true ? "Đang hoạt động" : "Không hoạt động",
                                                DepartmentId = department.DepartmentId,
                                                DepartmentName = department.DepartmentName,
                                                Code = department.Code

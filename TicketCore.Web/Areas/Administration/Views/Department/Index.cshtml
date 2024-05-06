@@ -101,11 +101,10 @@
                             type: "POST",
                             data: { departmentId: DepartmentId },
                             success: function (data, textStatus, xhr) {
-                                if (data.Result == "success") {
-                                    location.reload();
-                                }
                                 if (data.Result == "failed") {
                                     $.alert('Something Went Wrong');
+                                } else {
+                                    location.reload();
                                 }
                             },
                             error: function (xhr, status, err) {

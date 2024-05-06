@@ -156,7 +156,7 @@ namespace TicketCore.Data.Usermaster.Queries
                 adminlist.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return adminlist;
@@ -191,7 +191,7 @@ namespace TicketCore.Data.Usermaster.Queries
                 adminlist.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return adminlist;
@@ -229,7 +229,7 @@ namespace TicketCore.Data.Usermaster.Queries
                 adminlist.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return adminlist;
@@ -566,7 +566,7 @@ namespace TicketCore.Data.Usermaster.Queries
                 adminlist.Insert(0, new SelectListItem()
                 {
                     Value = "",
-                    Text = "-----Select-----"
+                    Text = "-----Chọn-----"
                 });
 
                 return adminlist;
