@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="appsettings.Development.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.1" />
     <PackageReference Include="AWSSDK.Extensions.NETCore.Setup" Version="3.7.7" />
     <PackageReference Include="DNTCaptcha.Core" Version="4.7.2" />
@@ -33,6 +37,7 @@
     <None Include="Areas\Administration\Views\Notice\Create.cshtml" />
     <None Include="Areas\Administration\Views\Notice\Edit.cshtml" />
     <None Include="Areas\Administration\Views\Notice\Index.cshtml" />
+    <None Include="appsettings.Development.json" />
   </ItemGroup>
 
 </Project>

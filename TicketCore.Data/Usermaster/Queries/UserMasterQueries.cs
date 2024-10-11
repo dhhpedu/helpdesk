@@ -11,6 +11,8 @@ using TicketCore.Models.Usermaster;
 using TicketCore.ViewModels.Usermaster;
 using System.Linq.Dynamic.Core;
 using TicketCore.Models.AgentCategoryAssigned;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace TicketCore.Data.Usermaster.Queries
 {
@@ -240,7 +242,7 @@ namespace TicketCore.Data.Usermaster.Queries
             }
         }
 
-   
+        
 
         public CommonUserDetailsViewModel GetCommonUserDetailsbyUserName(string username)
         {
@@ -600,6 +602,11 @@ namespace TicketCore.Data.Usermaster.Queries
             para.Add("@DepartmentId", departmentId);
             var listofteam = con.Query<TeamMembers>("Usp_TeamDetailsbyDepartmentId", para, commandType: CommandType.StoredProcedure).ToList();
             return listofteam;
+        }
+
+        public async Task<UserMaster> FindByNameAsync(string username)
+        {
+            return await _vueTicketDbContext.UserMasters.FirstOrDefaultAsync(x => x.UserName == username);
         }
     }
 }

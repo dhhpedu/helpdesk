@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using TicketCore.Models.AgentCategoryAssigned;
 using TicketCore.Models.Usermaster;
@@ -42,5 +43,6 @@ namespace TicketCore.Data.Usermaster.Queries
         UserMaster GetUserdetailsbyEmailId(string emailid);
         UserProfileViewModel GetCommonUserDetailsbyuserId(long userId);
         List<TeamMembers> GetTeam(int? departmentId);
+        Task<UserMaster> FindByNameAsync(string username);
     }
 }

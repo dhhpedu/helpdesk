@@ -1,10 +1,13 @@
 ﻿using DNTCaptcha.Core;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Globalization;
+using System.Net.Http;
+using System.Net;
 using System.Security.Cryptography;
 using System.Text;
 using TicketCore.Common;
@@ -18,6 +21,12 @@ using TicketCore.ViewModels.Usermaster;
 using TicketCore.Web.Extensions;
 using TicketCore.Web.Helpers;
 using TicketCore.Web.Messages;
+using System.Threading.Tasks;
+using System.Net.Http.Json;
+using System.Text.Json;
+using TicketCore.Web.Models;
+using TicketCore.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace TicketCore.Web.Controllers
 {
@@ -30,6 +39,7 @@ namespace TicketCore.Web.Controllers
         private readonly IHttpContextAccessor _httpContextAccessor;
         private readonly IAuditCommand _auditCommand;
         private readonly ILogger<PortalController> _logger;
+        private readonly VueTicketDbContext _vueTicketDbContext;
 
         public PortalController(IUserMasterQueries userMasterQueries,
 
@@ -37,6 +47,7 @@ namespace TicketCore.Web.Controllers
             IVerificationCommand verificationCommand,
             INotificationService notificationService,
             ICheckInStatusQueries checkInStatusQueries,
+            VueTicketDbContext vueTicketDbContext,
             IHttpContextAccessor httpContextAccessor, IAuditCommand auditCommand, ILogger<PortalController> logger)
         {
             _userMasterQueries = userMasterQueries;
@@ -46,6 +57,7 @@ namespace TicketCore.Web.Controllers
             _httpContextAccessor = httpContextAccessor;
             _auditCommand = auditCommand;
             _logger = logger;
+            _vueTicketDbContext = vueTicketDbContext;
         }
         public IActionResult Login()
         {
@@ -78,84 +90,142 @@ namespace TicketCore.Web.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         [ValidateDNTCaptcha(ErrorMessage = "Nhập đúng mã bảo mật.")]
-        public IActionResult Login(LoginViewModel loginViewModel)
+        public async Task<IActionResult> Login(LoginViewModel loginViewModel)
         {
             if (ModelState.IsValid)
             {
-                if (!_userMasterQueries.CheckUsernameExists(loginViewModel.Username))
+                var http = new HttpClient();
+                var endpoint = "https://authen.dhhp.edu.vn/api/user/login";
+                var response = await http.PostAsJsonAsync(endpoint, new
                 {
-                    ModelState.AddModelError("", "Không tồn tại tên đăng nhập");
+                    loginViewModel.Username,
+                    loginViewModel.Password
+                });
+                if (response.StatusCode == HttpStatusCode.BadRequest) return BadRequest(await response.Content.ReadAsStringAsync());
+
+                if (!response.IsSuccessStatusCode) return BadRequest("Đã có lỗi xảy ra!");
+
+                var userAPI = await JsonSerializer.DeserializeAsync<UserResponse>(await response.Content.ReadAsStreamAsync());
+                if (userAPI is null)
+                {
+                    ModelState.AddModelError("", "Đã có lỗi xảy ra!");
+                    return View();
+                }
+                if (userAPI.Data.UserType == UserType.Student)
+                {
+                    ModelState.AddModelError("", "Truy cập bị từ chối!");
+                    return View();
+                }
+                var user = await _userMasterQueries.FindByNameAsync(loginViewModel.Username);
+                var roleId = 2;
+                if (userAPI.Data.UserType == UserType.Leader)
+                {
+                    // Chuyên viên -> ko hoat dong
+                    roleId = 4;
+                }
+                if (userAPI.Data.UserType == UserType.Dean)
+                {
+                    // Nhóm trưởng -> ko hoat dong
+                    roleId = 5;
+                }
+                if (userAPI.Data.UserType == UserType.Deputy)
+                {
+                    // Trưởng đơn vị
+                    roleId = 6;
+                }
+                if (userAPI.Data.UserType == UserType.Administrator)
+                {
+                    // Trưởng đơn vị
+                    roleId = 1;
+                }
+                if (user is null)
+                {
+                    user = new TicketCore.Models.Usermaster.UserMaster
+                    {
+                        CreatedOn = DateTime.Now,
+                        UserName = loginViewModel.Username,
+                        LastName = userAPI.Data.LastName,
+                        FirstName = userAPI.Data.FirstName,
+                        IsFirstLogin = false,
+                        IsFirstLoginDate = DateTime.Now,
+                        PasswordHash = MD5Encryption(loginViewModel.Password),
+                        Status = true,
+                        EmailId = userAPI.Data.Email
+                    };
+                    await _vueTicketDbContext.AddAsync(user);
+                    await _vueTicketDbContext.SaveChangesAsync();
                 }
                 else
                 {
-                    var loggedInuserdetails = _userMasterQueries.GetCommonUserDetailsbyUserName(loginViewModel.Username);
-
-                    if (loggedInuserdetails == null)
+                    user.PasswordHash = MD5Encryption(loginViewModel.Password);
+                    user.FirstName = userAPI.Data.FirstName;
+                    user.LastName = userAPI.Data.LastName;
+                    user.EmailId = userAPI.Data.Email;
+                    user.IsFirstLogin = false;
+                    _vueTicketDbContext.Update(user);
+                }
+                var role = await _vueTicketDbContext.AssignedRoles.FirstOrDefaultAsync(x => x.UserId == user.UserId);
+                if (role is null)
+                {
+                    await _vueTicketDbContext.AssignedRoles.AddAsync(new TicketCore.Models.Usermaster.AssignedRoles
                     {
-                        ModelState.AddModelError("", "Sai tên đăng nhập hoặc mật khẩu");
-                        return View();
-                    }
+                        RoleId = roleId,
+                        CreatedOn = DateTime.Now,
+                        Status = true,
+                        UserId = user.UserId
+                    });
+                }
+                else
+                {
+                    role.RoleId = roleId;
+                    _vueTicketDbContext.AssignedRoles.Update(role);
+                }
 
-                    if (loggedInuserdetails.RoleId == Convert.ToInt32(RolesHelper.Roles.User))
-                    {
-                        if (!_userMasterQueries.CheckIsAlreadyVerifiedRegistration(loggedInuserdetails.UserId))
-                        {
-                            ModelState.AddModelError("", "Đang chờ xác minh email");
-                            return View();
-                        }
-                    }
+                await _vueTicketDbContext.SaveChangesAsync();
+                var loggedInuserdetails = _userMasterQueries.GetCommonUserDetailsbyUserName(loginViewModel.Username);
 
-                    if (loggedInuserdetails.Status == false)
-                    {
-                        ModelState.AddModelError("", "Tài khoản của bạn không hoạt động Liên hệ Quản trị viên");
-                        return View();
-                    }
-                    var hiddentoken = HttpContext.Session.GetString("Hdrandomtoken");
-                   // string st = MD5Encryption(loginViewModel.Password).ToUpper();
-                    if (MD5Encryption(loginViewModel.Password).ToUpper() == loggedInuserdetails.PasswordHash)
-                    {
-                        if (loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.Agent) || loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.AgentManager) || loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.Administrator))
-                        {
-                            if (!IsCategogryAssigned(loggedInuserdetails.UserId, loggedInuserdetails.RoleId))
-                            {
-                                TempData["LoginErrors"] = "Danh mục chưa được chỉ định, Vui lòng liên hệ với quản trị viên của bạn";
-                                return View(loginViewModel);
-                            }
-                        }
-
-                        SetAuthenticationCookie();
-                        SetApplicationSession(loggedInuserdetails);
-
-
-                        if (loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.User) && loggedInuserdetails.IsFirstLogin)
-                        {
-                            HttpContext.Session.SetString("OnboardingUser", "1");
-                            return RedirectToAction("Process", "Onboarding", new { Area = "User" });
-                        }
-
-                        if (loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.SuperAdmin))
-                        {
-                            Response.Cookies.Append(
-                                CookieRequestCultureProvider.DefaultCookieName,
-                                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en")),
-                                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
-                            );
-
-                        }
-
-
-                        return RedirectionManager(loggedInuserdetails.UserId, loggedInuserdetails.RoleId);
-
-                     
-
-                    }
-                    else
-                    {
-                        ModelState.AddModelError("", "Tên người dùng hoặc mật khẩu đã nhập không hợp lệ");
-                    }
-
+                if (loggedInuserdetails == null)
+                {
+                    ModelState.AddModelError("", "Sai tên đăng nhập hoặc mật khẩu");
                     return View();
                 }
+
+                if (loggedInuserdetails.Status == false)
+                {
+                    ModelState.AddModelError("", "Tài khoản của bạn không hoạt động Liên hệ Quản trị viên");
+                    return View();
+                }
+                if (loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.Agent) || loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.AgentManager) || loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.Administrator))
+                {
+                    if (!IsCategogryAssigned(loggedInuserdetails.UserId, loggedInuserdetails.RoleId))
+                    {
+                        TempData["LoginErrors"] = "Danh mục chưa được chỉ định, Vui lòng liên hệ với quản trị viên của bạn";
+                        ModelState.AddModelError("", "Danh mục chưa được chỉ định, Vui lòng liên hệ với quản trị viên của bạn");
+                        return View(loginViewModel);
+                    }
+                }
+
+                SetAuthenticationCookie();
+                SetApplicationSession(loggedInuserdetails);
+
+
+                if (loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.User) && loggedInuserdetails.IsFirstLogin)
+                {
+                    HttpContext.Session.SetString("OnboardingUser", "1");
+                    return RedirectToAction("Process", "Onboarding", new { Area = "User" });
+                }
+
+                if (loggedInuserdetails.RoleId == Convert.ToInt32(StatusMain.Roles.SuperAdmin))
+                {
+                    Response.Cookies.Append(
+                        CookieRequestCultureProvider.DefaultCookieName,
+                        CookieRequestCultureProvider.MakeCookieValue(new RequestCulture("en")),
+                        new CookieOptions { Expires = DateTimeOffset.UtcNow.AddYears(1) }
+                    );
+
+                }
+
+                return RedirectionManager(loggedInuserdetails.UserId, loggedInuserdetails.RoleId);
             }
 
             return View();
@@ -176,7 +246,7 @@ namespace TicketCore.Web.Controllers
                         _checkInStatusQueries.StatusCheckInCheckOut(userId);
                     }
                 }
-                
+
                 CookieOptions option = new CookieOptions();
 
                 if (Request.Cookies[AllSessionKeys.AuthenticationToken] != null)
@@ -195,7 +265,7 @@ namespace TicketCore.Web.Controllers
             }
 
         }
-       
+
         public string MD5Encryption(string originalPassword)
         {
             //Declarations
@@ -229,17 +299,20 @@ namespace TicketCore.Web.Controllers
             HttpContext.Session.SetInt32(AllSessionKeys.RoleId, commonUser.RoleId);
             HttpContext.Session.SetSession<long>(AllSessionKeys.UserId, commonUser.UserId);
             HttpContext.Session.SetString(AllSessionKeys.UserName, Convert.ToString(commonUser.UserName));
-            
+
             HttpContext.Session.SetString(AllSessionKeys.RoleName, Convert.ToString(commonUser.RoleName));
             if (commonUser.FirstName != null)
                 HttpContext.Session.SetString(AllSessionKeys.FirstName, Convert.ToString(commonUser.FirstName));
             if (commonUser.LastName != null)
                 HttpContext.Session.SetString(AllSessionKeys.LastName, Convert.ToString(commonUser.LastName));
             HttpContext.Session.SetString(AllSessionKeys.EmailId, Convert.ToString(commonUser.EmailId));
-            HttpContext.Session.SetString(AllSessionKeys.MobileNo, Convert.ToString(commonUser.MobileNo));
+            if (!string.IsNullOrEmpty(commonUser.MobileNo))
+            {
+                HttpContext.Session.SetString(AllSessionKeys.MobileNo, Convert.ToString(commonUser.MobileNo));
+            }
 
-            if (!string.IsNullOrEmpty(commonUser.FirstName)&& !string.IsNullOrEmpty(commonUser.LastName))
-                HttpContext.Session.SetString(AllSessionKeys.FullName, $"{commonUser.FirstName} {commonUser.LastName}" );
+            if (!string.IsNullOrEmpty(commonUser.FirstName) && !string.IsNullOrEmpty(commonUser.LastName))
+                HttpContext.Session.SetString(AllSessionKeys.FullName, $"{commonUser.FirstName} {commonUser.LastName}");
 
             AuditLogin();
         }
@@ -433,6 +506,6 @@ namespace TicketCore.Web.Controllers
             }
         }
 
-  
+
     }
 }
