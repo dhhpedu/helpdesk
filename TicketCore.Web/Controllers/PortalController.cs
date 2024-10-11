@@ -101,9 +101,17 @@ namespace TicketCore.Web.Controllers
                     loginViewModel.Username,
                     loginViewModel.Password
                 });
-                if (response.StatusCode == HttpStatusCode.BadRequest) return BadRequest(await response.Content.ReadAsStringAsync());
+                if (response.StatusCode == HttpStatusCode.BadRequest)
+                {
+                    ModelState.AddModelError("", await response.Content.ReadAsStringAsync());
+                    return View();
+                }
 
-                if (!response.IsSuccessStatusCode) return BadRequest("Đã có lỗi xảy ra!");
+                if (!response.IsSuccessStatusCode)
+                {
+                    ModelState.AddModelError("", $"{response.StatusCode}: Đã có lỗi xảy ra!");
+                    return View();
+                }    
 
                 var userAPI = await JsonSerializer.DeserializeAsync<UserResponse>(await response.Content.ReadAsStreamAsync());
                 if (userAPI is null)
